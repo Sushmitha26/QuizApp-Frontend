@@ -1,0 +1,49 @@
+<form method="POST">
+    {% csrf_token %}
+    {% for question in questions %}
+        <div class="question-block">
+            <label>Question:</label>
+            <input type="text" name="question_{{ question.id }}" value="{{ question.question }}" required>
+
+            <br><br>
+            <label>Choices:</label>
+            {% for choice in question.choice_set.all %}
+                <div class="choice-container">
+                    <input type="text" name="choices_{{ question.id }}" value="{{ choice.choice_text }}" required>
+                    <input type="radio" name="correct_choice_{{ question.id }}" value="{{ forloop.counter0 }}"
+                           {% if choice.is_correct %}checked{% endif %}> Correct
+                </div>
+            {% endfor %}
+        </div>
+        <hr>
+    {% endfor %}
+
+    <button type="submit" class="update-button">Update Quizzes</button>
+</form>
+
+<style>
+    input[type="text"] { 
+            width: 40%; 
+            padding: 8px; 
+        }
+    .question-block {
+        margin-bottom: 20px;
+    }
+    .choice-container {
+        display: flex;
+        align-items: center;
+        margin-bottom: 5px;
+    }
+    button {
+        background-color: #007bff;
+        color: white;
+        padding: 10px 15px;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 16px;
+    }
+    button:hover {
+        background-color: #0056b3;
+    }
+</style>

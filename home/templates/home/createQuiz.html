@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Create Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        label { 
+            display: block; 
+            margin-bottom: 5px; 
+        }
+        input[type="text"] { 
+            width: 80%; 
+            padding: 8px; 
+        }
+        .choice-group { 
+            display: flex; 
+            align-items: center; 
+            margin-bottom: 10px; 
+        }
+        .choice-group input[type="text"] { 
+            flex: 1; 
+            margin-right: 10px; 
+        }
+        button { 
+            display: inline-block;
+            padding: 12px 20px;
+            background-color: #007bff;
+            color: white;
+            font-size: 1.2em;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: 0.3s;
+         }
+        button:hover { 
+            background-color: #0056b3;
+         }
+    </style>
+</head>
+<body>
+    <h2>Create a Quiz Question</h2>
+    <form method="POST">
+        {% csrf_token %}
+        
+        <div class="form-group">
+            <label for="question">Question:</label>
+            <input type="text" id="question" name="question" required>
+        </div>
+
+        <h3>Choices:</h3>
+        <div class="choice-group">
+            <input type="text" name="choices" placeholder="Choice 1" required>
+            <input type="radio" name="correct_choice" value="0" required> Correct
+        </div>
+        <div class="choice-group">
+            <input type="text" name="choices" placeholder="Choice 2" required>
+            <input type="radio" name="correct_choice" value="1" required> Correct
+        </div>
+        <div class="choice-group">
+            <input type="text" name="choices" placeholder="Choice 3">
+            <input type="radio" name="correct_choice" value="2"> Correct
+        </div>
+        <div class="choice-group">
+            <input type="text" name="choices" placeholder="Choice 4">
+            <input type="radio" name="correct_choice" value="3"> Correct
+        </div>
+
+        <button type="submit">Create Quiz</button>
+    </form>
+</body>
+</html>

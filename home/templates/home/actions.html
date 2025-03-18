@@ -1,0 +1,123 @@
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Quiz App</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            font-size: 2.5em;
+            color: #333;
+        }
+        
+        a {
+            text-decoration: none;
+            font-size: 1.2em;
+            color: #007bff;
+            margin: 10px 0;
+        }
+        .quiz-button {
+            display: inline-block;
+            padding: 12px 20px;
+            background-color: #007bff;
+            color: white;
+            font-size: 1.2em;
+            border-radius: 5px;
+            margin-top: 10px;
+            transition: 0.3s;
+        }
+        .quiz-button:hover {
+            cursor: pointer;
+            background-color: #0056b3;
+        }
+        .logout {
+            position: absolute;
+            top: 10px;
+            right: 20px;
+        }
+        .logout-button {
+            color: #007bff;
+            padding: 8px 12px;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+        }
+        #delete-quiz button {
+            border: 2px solid black; /* Black border */
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="logout">
+        <form action="{% url 'logout' %}" method="POST">
+            {% csrf_token %}
+            <button type="submit" class="logout-button">Logout</button>
+        </form>
+    </div>
+
+
+    {% if messages %}
+        <div id="alert-box">
+            {% for message in messages %}
+                <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        </div>
+        <script>
+            setTimeout(() => {
+                document.getElementById("alert-box").style.display = "none";
+            }, 5000);
+        </script>
+        <style>
+            .alert {
+                padding: 10px;
+                margin: 10px 0;
+                border-radius: 5px;
+                text-align: center;
+            }
+            .alert-success {
+                background-color: #d4edda;
+                color: #155724;
+                border: 1px solid #c3e6cb;
+            }
+            .alert-error {
+                background-color: #f8d7da;
+                color: #721c24;
+                border: 1px solid #f5c6cb;
+            }
+        </style>
+    {% endif %}
+
+    <a href="{% url 'create_quiz' %}" class="quiz-button">Create Quiz</a>
+
+    <a href="{% url 'update_quiz' %}" class="quiz-button">Update Quiz</a>
+
+    <form id="delete-quiz" method="POST" action="{% url 'delete_quiz' %}">
+        {% csrf_token %}
+        <button type="button" class="quiz-button" onclick="confirmDelete()">Delete Quiz</button>
+    </form>
+
+    <script>
+        function confirmDelete() {
+            if (confirm("Are you sure you want to delete the quiz?")) {
+                document.getElementById("delete-quiz").submit();
+            }
+        }
+    </script>
+
+</body>
+
