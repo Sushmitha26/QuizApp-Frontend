@@ -3,14 +3,14 @@ version: 2.1
 executors:
   python-executor:
     docker:
-      - image: cimg/python:3.10  # Use Python version matching your project
+      - image: cimg/python:3.13
     working_directory: ~/repo
 
 jobs:
   test:
     executor: python-executor
     steps:
-      - checkout  # Pull your code
+      - checkout
       - run:
           name: Install Dependencies
           command: |
