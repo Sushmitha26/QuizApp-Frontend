@@ -11,13 +11,13 @@ class QuizAppTestCase(TestCase):
         Choice.objects.create(question=self.question, choice_text="Paris", is_correct=True)
         Choice.objects.create(question=self.question, choice_text="London", is_correct=False)
 
-        Admin.objects.create(username="admin", password="password123")
+        Admin.objects.create(username="017721457", password="123")
         
         self.client = Client()
 
     def test_home_page(self):
-        response = self.client.get(reverse('home'))
-        self.assertEqual(response.status_code, 200)
+        response = self.client.get(reverse('index'))
+        self.assertEqual(response.status_code, 302)
 
     def test_quiz_get(self):
         response = self.client.get(reverse('quiz'))
@@ -33,10 +33,10 @@ class QuizAppTestCase(TestCase):
 
     def test_admin_login_success(self):
         response = self.client.post(reverse('adminpage'), {
-            'username': 'admin',
-            'password': 'password123'
+            'username': '017721457',
+            'password': '123'
         })
-        self.assertEqual(response.status_code, 200)
+        self.assertEqual(response.status_code, 302)
         self.assertTemplateUsed(response, 'home/actions.html')
 
     def test_admin_login_failure(self):
