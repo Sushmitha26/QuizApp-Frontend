@@ -1,4 +1,4 @@
-**QuizApp Frontend:**
+**QuizApp:**
 A simple Django-based quiz application. The app allows users to take quizzes, view scores and administrators to manage questions.
 
 **Features**
@@ -11,6 +11,48 @@ A simple Django-based quiz application. The app allows users to take quizzes, vi
 2. Django
 3. Django REST Framework (for API functionality)
 4. SQLite (database)
+
+**API Endpoints:**
+<br />
+**1. create_quiz**
+<br />
+API endpoint for creating new quiz questions and choices.
+Method: POST
+<br />
+Parameters:
+<br />
+question: The quiz question text.
+<br />
+choices: List of possible choices for the question.
+<br />
+correct_choice: The index of the correct choice in the choices list.
+
+**2. list_questions**
+<br />
+API endpoint to list all quiz questions.
+<br />
+Method: GET
+
+**3. update_quiz**
+<br />
+API endpoint to update an existing quiz question and its choices.
+<br />
+Method: PUT
+<br />
+Parameters:
+<br />
+question_id: The ID of the question to update.
+<br />
+question: The new question text.
+<br />
+choices: The new list of choices for the question.
+
+**4. delete_quiz**
+<br />
+API endpoint to delete a quiz question.
+Method: DELETE
+Parameters:
+question_id: The ID of the question to delete.
 
 **How to run in local?**
 <br />
