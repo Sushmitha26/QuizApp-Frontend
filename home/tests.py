@@ -24,12 +24,12 @@ class QuizAppTestCase(TestCase):
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, self.question.question)
 
-    # def test_quiz_post_correct_answer(self):
-    #     correct_choice = self.question.choice_set.get(is_correct=True)
-    #     response = self.client.post(reverse('quiz'), {
-    #         f'choice{self.question.id}': correct_choice.id
-    #     })
-    #     self.assertContains(response, 'correct_answers')
+    def test_quiz_post_correct_answer(self):
+        correct_choice = self.question.choice_set.get(is_correct=True)
+        response = self.client.post(reverse('quiz'), {
+            f'choice{self.question.id}': correct_choice.id
+        })
+        self.assertContains(response, 'Your score: 1')
 
     def test_admin_login_success(self):
         response = self.client.post(reverse('adminpage'), {
