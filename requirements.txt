@@ -116,8 +116,6 @@ python-json-logger==3.3.0
 python-magic==0.4.27
 python-oxmsg==0.0.2
 pytz==2025.1
-pywin32==310
-pywinpty==2.0.15
 PyYAML==6.0.2
 pyzmq==26.3.0
 RapidFuzz==3.12.2
