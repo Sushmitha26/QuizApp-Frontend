@@ -1,0 +1,35 @@
+version: 2.1
+
+executors:
+  python-executor:
+    docker:
+      - image: cimg/python:3.10  # Use Python version matching your project
+    working_directory: ~/repo
+
+jobs:
+  test:
+    executor: python-executor
+    steps:
+      - checkout  # Pull your code
+      - run:
+          name: Install Dependencies
+          command: |
+            python -m venv venv
+            . venv/bin/activate
+            pip install -r requirements.txt
+      - run:
+          name: Run Migrations
+          command: |
+            . venv/bin/activate
+            python manage.py migrate
+      - run:
+          name: Run Django Tests
+          command: |
+            . venv/bin/activate
+            python manage.py test
+
+workflows:
+  version: 2
+  test-and-build:
+    jobs:
+      - test
